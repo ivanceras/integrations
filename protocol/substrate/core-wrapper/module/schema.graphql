@@ -24,6 +24,9 @@ type Mutation {
   chainGetBlockHash(
     argument: String
   ): CustomType!
+
+  chainGetRuntimeMetadata(argument: String
+  ): String!
 }
 
 type CustomType {

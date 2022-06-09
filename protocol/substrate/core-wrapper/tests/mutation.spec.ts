@@ -32,12 +32,14 @@ describe("e2e", () => {
 
   it("chainGetBlockHash", async () => {
     // You can use the client directly
-    await client.invoke({
+    console.log("invoking chainGetBlockHash...");
+    let result1 = await client.invoke({
       uri,
       module: "mutation",
       method: "chainGetBlockHash"
     });
 
+    console.log("result1:", result1);
     // Or use the test app's codegen types (see web3api.app.yaml)
     const result = await Substrate_Mutation.chainGetBlockHash(
       {
@@ -46,6 +48,7 @@ describe("e2e", () => {
       client,
       uri
     );
+    console.log("result2: ", result);
 
     expect(result.error).toBeFalsy();
     expect(result.data).toBeTruthy();
@@ -53,5 +56,28 @@ describe("e2e", () => {
 
     const httpResponse = JSON.parse(result.data?.prop || "");
     expect(httpResponse.url).toContain("https://via.placeholder.com/");
+  });
+
+  it("chainGetRuntimeMetadata", async () => {
+    // You can use the client directly
+    console.log("invoking chainGetRuntimeMetadata...");
+    let result1 = await client.invoke({
+      uri,
+      module: "mutation",
+      method: "chainGetRuntimeMetadata"
+    });
+
+    console.log("result1:", result1);
+    // Or use the test app's codegen types (see web3api.app.yaml)
+    const result = await Substrate_Mutation.chainGetRuntimeMetadata(
+      {
+        argument: "argument value"
+      },
+      client,
+      uri
+    );
+    console.log("result2: ", result);
+
+    expect(result.data).toContain("metadata");
   });
 });

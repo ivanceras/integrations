@@ -2,20 +2,41 @@
 name = "substrate-core-wrapper"
 version = "0.0.1"
 description = "TODO"
-authors = [
-  "TODO <todo@todo.com>"
-]
+authors = [ "TODO <todo@todo.com>" ]
 repository = "https://todo.com"
 edition = "2021"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
 web3api-wasm-rs = { version = "0.0.1-prealpha.82" }
+getrandom = { version = "0.2", features = ["custom"] }
 serde = { version = "1.0", features = ["derive"] }
+#mycelium = { path = "/home/lee/git-src/chainsafe/polywrap-substrate/mycelium" }
+log = "0.4"
+serde_json = "1"
+hex = "0.4.3"
+thiserror = "1.0.30"
+codec = { package = "parity-scale-codec", default-features= false, version = "3.0.0", features = ['derive'] }
+#codec = { package = "parity-scale-codec", default-features= false, version = "3.0.0" }
+#scale-info = { version = "2.0.1", default-features= false, features = ["derive", "serde"] }
+scale-info = { version = "2.0.1", default-features= false }
+frame-metadata = { version = "15.0.0", default-features= false, features = ["v14"] }
+#sp-core = { version = "6.0.0", default-features = false, features = ["full_crypto"], git = "https://github.com/paritytech/substrate.git", branch = "master" }
+sp-core = { version = "6.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "master" }
+#sp-runtime = { version = "6.0.0", default-features = false, features = ["std"], git = "https://github.com/paritytech/substrate.git", branch = "master" }
+#sp-version = { version = "5.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "master", features = ["serde", "impl-serde"] }
+sp-version = { version = "5.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "master", features = ["std", "serde"]}
+#sp-std = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "master" }
 
-[lib]
-crate-type = ["cdylib"]
+[dev-dependencies]
+wasm-bindgen-test = "0.3.0"
 
 [profile.release]
 opt-level = 's'
 lto = true
 panic = 'abort'
+
+[features]
+w3-invoke = []

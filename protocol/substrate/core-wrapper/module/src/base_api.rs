@@ -5,10 +5,9 @@ use crate::w3::HttpRequest;
 use crate::w3::HttpResponse;
 use crate::w3::HttpResponseType;
 use crate::{error::Error, utils::FromHexStr};
-use frame_metadata::RuntimeMetadataPrefixed;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use sp_core::{Decode, H256};
-use sp_version::RuntimeVersion;
+//use frame_metadata::RuntimeMetadataPrefixed;
+//use sp_core::{Decode, H256};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct JsonReq {
@@ -39,6 +38,7 @@ impl BaseApi {
         }
     }
 
+    /*
     /// Get the runtime metadata of a substrate node.
     /// This is equivalent to running the following command
     ///
@@ -59,6 +59,7 @@ impl BaseApi {
             None => Ok(None),
         }
     }
+    */
 
     /// Make a rpc request and return the result.result if it has value
     pub(crate) fn json_request_value<P: Serialize>(

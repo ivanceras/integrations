@@ -15,6 +15,11 @@
 
 */
 
+#[cfg(not(feature = "std"))]
+extern crate alloc;
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
+
 use hex::FromHexError;
 use sp_core::H256;
 
@@ -40,5 +45,39 @@ impl FromHexStr for H256 {
             32 => Ok(H256::from_slice(&vec)),
             _ => Err(hex::FromHexError::InvalidStringLength),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_hextstr_to_vec() {
+        assert_eq!(Vec::from_hex("0x01020a"), Ok(vec!(1, 2, 10)));
+        assert_eq!(
+            Vec::from_hex("null"),
+            Err(hex::FromHexError::InvalidHexCharacter { c: 'n', index: 0 })
+        );
+        assert_eq!(
+            Vec::from_hex("0x0q"),
+            Err(hex::FromHexError::InvalidHexCharacter { c: 'q', index: 1 })
+        );
+    }
+
+    #[test]
+    fn test_hextstr_to_hash() {
+        assert_eq!(
+            H256::from_hex("0x0000000000000000000000000000000000000000000000000000000000000000"),
+            Ok(H256::from([0u8; 32]))
+        );
+        assert_eq!(
+            H256::from_hex("0x010000000000000000"),
+            Err(hex::FromHexError::InvalidStringLength)
+        );
+        assert_eq!(
+            H256::from_hex("0x0q"),
+            Err(hex::FromHexError::InvalidHexCharacter { c: 'q', index: 1 })
+        );
     }
 }

@@ -1,5 +1,3 @@
-//use crate::types::metadata;
-
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
     #[error("Http request error: {0}")]
@@ -8,20 +6,12 @@ pub enum Error {
     FromHexError(#[from] hex::FromHexError),
     #[error("Error decoding json: {0}")]
     JsonError(#[from] serde_json::Error),
-    /*
-    #[error("Invalid metadata: {0}")]
-    InvalidMetadataError(#[from] metadata::InvalidMetadataError),
-    */
     #[error("Unable to get chain Metadata")]
     NoMetadata,
     #[error("Unable to get chain Genesis hash")]
     NoGenesisHash,
     #[error("Unable to get chain Runtime version")]
     NoRuntimeVersion,
-    /*
-    #[error("Metadata error: {0}")]
-    MetadataError(#[from] metadata::MetadataError),
-    */
     #[error("Codec error: {0}")]
     CodecError(#[from] codec::Error),
     #[error("Error response: {0}")]

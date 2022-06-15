@@ -6,7 +6,6 @@ use crate::w3::HttpRequest;
 use crate::w3::HttpResponse;
 use crate::w3::HttpResponseType;
 use crate::{error::Error, utils::FromHexStr};
-//use frame_metadata::RuntimeMetadataPrefixed;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use sp_core::{Decode, H256};
 /*
@@ -15,6 +14,7 @@ use sp_runtime::{
     traits::{Block, Header},
 };
 */
+use frame_metadata::RuntimeMetadataPrefixed;
 use sp_version::RuntimeVersion;
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
@@ -180,6 +180,7 @@ impl BaseApi {
     }
     */
 
+    /*
     pub fn fetch_runtime_version(&self) -> Result<Option<RuntimeVersion>, Error> {
         let version = self.json_request_value("state_getRuntimeVersion", ())?;
         match version {
@@ -190,6 +191,7 @@ impl BaseApi {
             None => Ok(None),
         }
     }
+    */
 
     pub fn submit_extrinsic(
         &self,

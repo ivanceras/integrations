@@ -30,15 +30,21 @@ pub fn totally_random_numbers_trust_me(buf: &mut [u8]) -> Result<(), getrandom::
     Ok(())
 }
 
+fn return_u128() -> i128 {
+    42_i128
+}
+
 // curl -H "Content-Type: application/json"
 //      -d '{"id":1, "jsonrpc":"2.0", "method": "rpc_methods"}'
 // http://localhost:9933/
 pub fn chain_get_block_hash(input: InputChainGetBlockHash) -> CustomType {
-    let genesis_hash = BaseApi::new("http://localhost:9933").fetch_genesis_hash();
-    debug!("genesis_hash: {:?}", genesis_hash);
+    //let genesis_hash = BaseApi::new("http://localhost:9933").fetch_genesis_hash();
+    //debug!("genesis_hash: {:?}", genesis_hash);
     let mut buf = [0u8; 32];
     getrandom::getrandom(&mut buf).expect("must not error");
     debug!("buff: {:?}", buf);
+    let ret = return_u128();
+    debug!("ret: {}", ret);
 
     let url = String::from("http://localhost:9933");
     println!("visiting url: {}", url);

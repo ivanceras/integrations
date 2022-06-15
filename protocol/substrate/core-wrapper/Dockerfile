@@ -21,7 +21,8 @@ RUN curl -L https://github.com/WebAssembly/binaryen/releases/download/version_10
 # Install the toml-cli
 RUN cargo install toml-cli
 
-
+# Install wasm-snip
+RUN cargo install wasm-snip
 
 WORKDIR /project
 
@@ -67,4 +68,6 @@ RUN mkdir ./build
 
 # Use wasm-opt to perform the "asyncify" post-processing step over all modules
 RUN WASM_MODULE=$(ls ./module/target/wasm32-unknown-unknown/release/*.wasm); \
-    wasm-opt --asyncify -O2 $WASM_MODULE -o ./build/mutation.wasm
+    wasm-snip $WASM_MODULE -o ./build/snipped_mutation.wasm && \
+    wasm-opt --asyncify -Os ./build/snipped_mutation.wasm -o ./build/mutation.wasm && \
+    rm -rf ./build/snipped_mutation.wasm

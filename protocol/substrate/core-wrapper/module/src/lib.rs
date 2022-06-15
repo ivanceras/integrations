@@ -27,17 +27,15 @@ pub fn totally_random_numbers_trust_me(buf: &mut [u8]) -> Result<(), getrandom::
 //      -d '{"id":1, "jsonrpc":"2.0", "method": "rpc_methods"}'
 // http://localhost:9933/
 pub fn chain_get_block_hash(input: InputChainGetBlockHash) -> CustomType {
-    /*
     let runtime_metadata = BaseApi::new("http://localhost:9933").fetch_runtime_metadata();
     debug!("runtime_metadata: {:?}", runtime_metadata);
-    */
 
     let raw_version =
         BaseApi::new("http://localhost:9933").json_request_value("state_getRuntimeVersion", ());
     debug!("raw_version: {:#?}", raw_version);
 
     let raw_block =
-        BaseApi::new("http://localhost:9933").json_request_value("chain_getBlock", vec![0]);
+        BaseApi::new("http://localhost:9933").json_request_value("chain_getBlock", vec![0u32]);
 
     debug!("raw_block: {:?}", raw_block);
 

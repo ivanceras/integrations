@@ -25,3 +25,6 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 ```
 
 - This happens when trying to a more complex types in substrate crates such as `sp-core`, `sp-runtime`, `sp-version`, etc.
+    - [RuntimeMetadataPrefixed](https://paritytech.github.io/substrate/master/frame_metadata/struct.RuntimeMetadataPrefixed.html)
+    - [H256](https://paritytech.github.io/substrate/master/sp_core/struct.H256.html)
+    - [Decode](https://paritytech.github.io/substrate/master/parity_scale_codec/trait.Decode.html)

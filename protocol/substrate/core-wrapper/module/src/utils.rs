@@ -16,7 +16,7 @@
 */
 
 use hex::FromHexError;
-//use sp_core::H256;
+use sp_core::H256;
 
 pub trait FromHexStr {
     fn from_hex(hex: &str) -> Result<Self, hex::FromHexError>
@@ -32,7 +32,6 @@ impl FromHexStr for Vec<u8> {
     }
 }
 
-/*
 impl FromHexStr for H256 {
     fn from_hex(hex: &str) -> Result<Self, FromHexError> {
         let vec = Vec::from_hex(hex)?;
@@ -43,7 +42,6 @@ impl FromHexStr for H256 {
         }
     }
 }
-*/
 
 #[cfg(test)]
 mod tests {
